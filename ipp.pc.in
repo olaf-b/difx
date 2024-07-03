@@ -1,0 +1,7 @@
+
+Name: ipp
+Description: Intel Performance Primitives
+Requires:
+Version: @ipp_version_str@
+Libs: @ipp_libs@
+Cflags: @ipp_cflags@
