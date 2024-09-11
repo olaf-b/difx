@@ -2,7 +2,7 @@ AC_INIT([difx], [2.8.1], [])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AC_PROG_AWK
-#AC_CONFIG_HEADERS([config.h])
+dnl AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
  Makefile
  ipp.pc
@@ -326,7 +326,10 @@ AS_IF([test "x$with_ipp" != xno],
   ],
   [])
 
-ipp_cflags+=" $ipp_defines -I$ipp_includes"
+AS_IF([test "x$with_ipp" != xno],
+  [ipp_cflags+=" $ipp_defines -I$ipp_includes"]
+  [])
+
 AC_SUBST([ipp_version_str])
 AC_SUBST([ipp_version_major])
 AC_SUBST([ipp_version_minor])
@@ -339,58 +342,67 @@ AC_SUBST([ipp_defines])
 AC_SUBST([ipp_cflags])
 AC_SUBST([ipp_libs])
 
-dnl libtargets	
-AC_CONFIG_SUBDIRS([libraries/difxio])
-AC_CONFIG_SUBDIRS([libraries/codifio])
-AC_CONFIG_SUBDIRS([difxmessage])
-AC_CONFIG_SUBDIRS([dirlist])
-AC_CONFIG_SUBDIRS([mark6sg])
-AC_CONFIG_SUBDIRS([mark5access])
-AC_CONFIG_SUBDIRS([mark6meta])
-AC_CONFIG_SUBDIRS([python])
-AC_CONFIG_SUBDIRS([vdifio])
+dnl libs
+AS_IF([test "x$enable_difxio" == xyes], [AC_CONFIG_SUBDIRS([libraries/difxio])])
+AM_CONDITIONAL([ENABLE_DIFXIO], [test "x$enable_difxio" = xyes])
+AS_IF([test "x$enable_codifio" == xyes], [AC_CONFIG_SUBDIRS([libraries/codifio])])
+AM_CONDITIONAL([ENABLE_CODIFIO], [test "x$enable_codifio" = xyes])
+AS_IF([test "x$enable_difxmessage" == xyes], [AC_CONFIG_SUBDIRS([libraries/difxmessage])])
+AM_CONDITIONAL([ENABLE_DIFXMESSAGE], [test "x$enable_difxmessage" = xyes])
+AS_IF([test "x$enable_dirlist" == xyes], [AC_CONFIG_SUBDIRS([libraries/dirlist])])
+AM_CONDITIONAL([ENABLE_DIRLIST], [test "x$enable_dirlist" = xyes])
+AS_IF([test "x$enable_mark6sg" == xyes], [AC_CONFIG_SUBDIRS([libraries/mark6sg])])
+AM_CONDITIONAL([ENABLE_MARK6SG], [test "x$enable_mark6sg" = xyes])
+AS_IF([test "x$enable_mark5access" == xyes], [AC_CONFIG_SUBDIRS([libraries/mark5access])])
+AM_CONDITIONAL([ENABLE_MARK5ACCESS], [test "x$enable_mark5access" = xyes])
+AS_IF([test "x$enable_mark6meta" == xyes], [AC_CONFIG_SUBDIRS([libraries/mark6meta])])
+AM_CONDITIONAL([ENABLE_MARK6META], [test "x$enable_mark6meta" = xyes])
+AS_IF([test "x$enable_python" == xyes], [AC_CONFIG_SUBDIRS([libraries/python])])
+AM_CONDITIONAL([ENABLE_PYTHON], [test "x$enable_python" = xyes])
+AS_IF([test "x$enable_vdifio" == xyes], [AC_CONFIG_SUBDIRS([libraries/vdifio])])
+AM_CONDITIONAL([ENABLE_VDIFIO], [test "x$enable_vdifio" = xyes])
 
-dnl utiltargets
-dnl if components["calcif2"] and not master_tag:
-dnl     utiltargets.append(["calcif2",   difx_version, True,False,True,False])
-dnl if components["difx2profile"]:
-dnl     utiltargets.append([
-dnl 	"pulsar/difx2profile",       difx_version, True,False,True,True])
-dnl if components["misc"]:
-dnl     utiltargets.append(["misc",      difx_version, True,False,False,False])
-dnl if components["vis2screen"]:
-dnl     utiltargets.append(["vis2screen",difx_version, True,False,False,True])
+dnl applications
+AS_IF([test "x$enable_calcserver" == xyes], [AC_CONFIG_SUBDIRS([applications/calcserver])])
+AM_CONDITIONAL([ENABLE_CALCSERVER], [test "x$enable_calcserver" = xyes])
+AS_IF([test "x$enable_difxcalc11" == xyes], [AC_CONFIG_SUBDIRS([applications/difxcalc11])])
+AM_CONDITIONAL([ENABLE_DIFXCALC11], [test "x$enable_difxcalc11" = xyes])
+AS_IF([test "x$enable_difx2fits" == xyes], [AC_CONFIG_SUBDIRS([applications/difx2fits])])
+AM_CONDITIONAL([ENABLE_DIFX2FITS], [test "x$enable_difx2fits" = xyes])
+AS_IF([test "x$enable_vex2difx" == xyes], [AC_CONFIG_SUBDIRS([applications/vex2difx])])
+AM_CONDITIONAL([ENABLE_VEX2DIFX], [test "x$enable_VEX2DIFX" = xyes])
+AS_IF([test "x$enable_difx2mark4" == xyes], [AC_CONFIG_SUBDIRS([applications/difx2mark4])])
+AM_CONDITIONAL([ENABLE_DIFX2MARK4], [test "x$enable_difx2mark4" = xyes])
+AS_IF([test "x$enable_difxfilterbank" == xyes], [AC_CONFIG_SUBDIRS([applications/difxfilterbank])])
+AM_CONDITIONAL([ENABLE_DIFXFILTERBANK], [test "x$enable_difxfilterbank" = xyes])
+AS_IF([test "x$enable_hops" == xyes], [AC_CONFIG_SUBDIRS([applications/hops])])
+AM_CONDITIONAL([ENABLE_HOPS], [test "x$enable_hops" = xyes])
+AS_IF([test "x$enable_m6support" == xyes], [AC_CONFIG_SUBDIRS([applications/m6support])])
+AM_CONDITIONAL([ENABLE_M6SUPPORT], [test "x$enable_m6support" = xyes])
+AS_IF([test "x$enable_polconvert" == xyes], [AC_CONFIG_SUBDIRS([applications/polconvert])])
+AM_CONDITIONAL([ENABLE_POLCONVERT], [test "x$enable_polconvert" = xyes])
+AS_IF([test "x$enable_guiServer" == xyes], [AC_CONFIG_SUBDIRS([applications/guiServer])])
+AM_CONDITIONAL([ENABLE_GUISERVER], [test "x$enable_guiserver" = xyes])
+AS_IF([test "x$enable_mk5daemon" == xyes], [AC_CONFIG_SUBDIRS([applications/mk5daemon])])
+AM_CONDITIONAL([ENABLE_MK5DAEMON], [test "x$enable_mk5daemon" = xyes])
+AS_IF([test "x$enable_difx_monitor" == xyes], [AC_CONFIG_SUBDIRS([applications/difx_monitor])])
+AM_CONDITIONAL([ENABLE_DIFX_MONITOR], [test "x$enable_difxmonitor" = xyes])
+AS_IF([test "x$enable_datasim" == xyes], [AC_CONFIG_SUBDIRS([applications/datasim])])
+AM_CONDITIONAL([ENABLE_DATASIM], [test "x$enable_datasim" = xyes])
+AS_IF([test "x$enable_espresso" == xyes], [AC_CONFIG_SUBDIRS([applications/expresso])])
+AM_CONDITIONAL([ENABLE_ESPRESSO], [test "x$enable_espresso" = xyes])
 
 
-dnl apptargets = []
-dnl if components["calcif2"] and master_tag:
-dnl     apptargets.append(["calcif2",   difx_version, True,False,True,False])
-dnl if components["calcserver"]:
-dnl     apptargets.append(["calcserver", difx_version, True,True,False,False])
-dnl if components["difxcalc11"]:
-dnl     apptargets.append(["difxcalc11", difx_version, True,False,False,False])
-dnl if components["difx2fits"]:
-dnl     apptargets.append(["difx2fits",  difx_version, True,False,True,False])
-dnl if components["vex2difx"]:
-dnl     apptargets.append(["vex2difx",   difx_version, True,True,True,False])
-dnl if components["difx2mark4"]:
-dnl     apptargets.append(["difx2mark4", difx_version, True,True,True,False])
-dnl if components["difxfilterbank"]:
-dnl     apptargets.append(["difxfilterbank", difx_version, True,False,False,True])
-dnl if components["hops"]:
-dnl     apptargets.append(["hops",       difx_version, True,True,True,False])
-dnl if components["m6support"]:
-dnl     apptargets.append(["m6support",  difx_version, True,False,True,False])
-dnl if components["polconvert"]:
-dnl     apptargets.append(["polconvert", difx_version, True,False,True,False])
-dnl if components["guiServer"]:
-dnl     apptargets.append(["guiServer",  difx_version, True,False,False,True])
-dnl if components["mk5daemon"]:
-dnl     apptargets.append(["mk5daemon",  difx_version, True,False,True,False])
-dnl if components["difx_monitor"]:
-dnl     apptargets.append(["difx_monitor", difx_version, True,False,False,True])
-dnl if components["datasim"]:
-dnl     apptargets.append(["datasim", difx_version, True,True,True,False])
+dnl utils
+AS_IF([test "x$enable_calcif2" == xyes], [AC_CONFIG_SUBDIRS([utilities/calcif2])])
+AM_CONDITIONAL([ENABLE_CALCIF2], [test "x$enable_calcif2" = xyes])
+AS_IF([test "x$enable_difx2profile" == xyes], [AC_CONFIG_SUBDIRS([utilities/pulsar/difx2profile])])
+AM_CONDITIONAL([ENABLE_DIFX2PROFILE], [test "x$enable_difx2profile" = xyes])
+AS_IF([test "x$enable_misc" == xyes], [AC_CONFIG_SUBDIRS([utilities/misc])])
+AM_CONDITIONAL([ENABLE_MISC], [test "x$enable_misc" = xyes])
+AS_IF([test "x$enable_vis2screen" == xyes], [AC_CONFIG_SUBDIRS([utilities/vis2screen])])
+AM_CONDITIONAL([ENABLE_VIS2SCREEN], [test "x$enable_vis2screen" = xyes])
 
+AC_SUBST([subdirs])
 
 AC_OUTPUT
