@@ -6,9 +6,9 @@ AC_SUBST([LIBRARY_VERSION])
 
 AM_INIT_AUTOMAKE
 
-AC_LANG_CPLUSPLUS
+AC_LANG([C++])
 AC_CONFIG_SRCDIR([src/difx2profile.h])
-AM_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CXX
