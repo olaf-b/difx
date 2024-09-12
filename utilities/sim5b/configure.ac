@@ -1,6 +1,9 @@
 AC_INIT([sim5b], [0.1], [Walter Brisken <wbrisken@nrao.edu>])
-AM_CONFIG_HEADER(config.h)
-
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+])
 AM_INIT_AUTOMAKE
 
 AC_PROG_CC
@@ -14,7 +17,4 @@ PKG_CHECK_MODULES(FFTW3, fftw3)
 LIBS="${LIBS} ${DIFXIO_LIBS} ${FFTW3_LIBS}"
 CFLAGS="-D_LARGE_FILE_SOURCE -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 ${CFLAGS} ${DIFXIO_CFLAGS} ${FFTW3_CFLAGS}"
 
-AC_OUTPUT([ \
-	Makefile \
-	src/Makefile \
-])
+AC_OUTPUT
