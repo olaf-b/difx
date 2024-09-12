@@ -25,11 +25,12 @@ CFLAGS="${CFLAGS} ${GSL_CFLAGS}"
 
 AC_SUBST(de421_file)
 
-AC_CONFIG_HEADERS([src/param11.i])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 	Makefile
 	data/Makefile
 	src/Makefile
+	src/param11.i
 ])
 
 AC_OUTPUT()
