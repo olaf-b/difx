@@ -3,10 +3,10 @@
 
 # generated with autoscan, vers 2.59, hacked by gbc, wfb
 
-AC_PREREQ(2.59)
+AC_PREREQ([2.72])
 AC_INIT([difx_monitor],[0.0],[Chris Phillips difx-users@googlegroups.com])
 AM_INIT_AUTOMAKE([foreign])
-
+AC_CONFIG_FILES([Makefile])
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
@@ -34,7 +34,6 @@ LIBS=" ${FXCORR_LIBS} ${M5ACCESS_LIBS} ${DIFXMESSAGE_LIBS} ${PLPLOT_LIBS}"
 
 
 # Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS([arpa/inet.h limits.h netdb.h netinet/in.h stdint.h])
 AC_CHECK_HEADERS([stdlib.h string.h sys/socket.h sys/time.h unistd.h])
 
@@ -42,13 +41,9 @@ AC_CHECK_HEADERS([stdlib.h string.h sys/socket.h sys/time.h unistd.h])
 AC_HEADER_STDBOOL
 AC_C_CONST
 AC_C_INLINE
-AC_HEADER_TIME
 
 # Checks for library functions.
-#AC_FUNC_MALLOC  ## CJP This breaks C++??
-AC_TYPE_SIGNAL
 AC_CHECK_FUNCS([gethostbyname inet_ntoa memset socket])
 
-AC_OUTPUT([
-	Makefile \
-])
+AC_OUTPUT
+
