@@ -1,7 +1,6 @@
 AC_INIT([vex2ovex], [1.1] )
-
+AC_CONFIG_FILES([Makefile])
 AM_INIT_AUTOMAKE
 
-AC_OUTPUT([ \
-	Makefile \
-])
+AC_OUTPUT
+

@@ -1,7 +1,12 @@
 AC_INIT([xcube], [0.1], [Walter Brisken <wbrisken@nrao.edu>], [xcube])
 
-AM_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+])
 
+])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_PROG_CXX
@@ -15,7 +20,4 @@ PKG_CHECK_MODULES(VDIFIO, vdifio >= 0.1)
 
 version=AC_PACKAGE_VERSION
 
-AC_OUTPUT([
-	Makefile \
-	src/Makefile \
-])
+AC_OUTPUT
