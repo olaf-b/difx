@@ -1,21 +1,20 @@
-AC_INIT([beamformer], [0.1.0], [difxusers at googlegroups.com])
+AC_INIT([beamformer],[0.1.0],[difxusers at googlegroups.com])
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.50)
+AC_PREREQ([2.72])
 PACKAGE_VERSION=AC_PACKAGE_VERSION
 AC_SUBST([PACKAGE_VERSION])
 AC_SUBST([LIBRARY_VERSION])
 AC_CONFIG_SRCDIR([src/Beamformer.h])
 
-AM_INIT_AUTOMAKE
-AM_CONFIG_HEADER([config.h])
+AM_INIT_AUTOMAKE()
+AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
-AC_PROG_RANLIB
-AC_PROG_LIBTOOL
+LT_INIT
 
 # Checks for libraries.
 
