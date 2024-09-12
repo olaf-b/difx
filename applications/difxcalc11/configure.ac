@@ -9,6 +9,7 @@ AC_C_BIGENDIAN( \
 	[de421_file=DE421_little_Endian] \
 )
 
+
 AC_PROG_F77
 AC_LANG(Fortran)
 AC_PROG_FC
@@ -24,12 +25,11 @@ CFLAGS="${CFLAGS} ${GSL_CFLAGS}"
 
 AC_SUBST(de421_file)
 
-
+AC_CONFIG_HEADERS([src/param11.i])
 AC_CONFIG_FILES([
-	Makefile \
-	data/Makefile \
-	src/Makefile \
-	src/param11.i \
+	Makefile
+	data/Makefile
+	src/Makefile
 ])
 
 AC_OUTPUT()
