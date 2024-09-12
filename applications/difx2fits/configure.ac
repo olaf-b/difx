@@ -9,7 +9,7 @@ AC_PROG_CC
 AM_SANITY_CHECK
 
 AC_CHECK_LIB(m, erf,,[AC_MSG_ERROR("need libm")])
-
+export PKG_CONFIG_PATH+=":../libraries/difxio"
 PKG_CHECK_MODULES(DIFXIO, difxio >= 3.8.0)
 
 LIBS="${LIBS} ${DIFXIO_LIBS}"
