@@ -1,7 +1,11 @@
 AC_INIT([guiServer], [DEVELr7531], [John Spitzak])
 
 AM_INIT_AUTOMAKE([foreign])
-
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+  network/Makefile
+])
 CXX=${MPICXX}
 
 AC_PROG_CXX
@@ -20,8 +24,4 @@ CXXFLAGS="${CXXFLAGS} ${DIFXMESSAGE_CFLAGS} ${FXCORR_CFLAGS} -DDIFX_VERSION='\"$
 
 echo "CXXFLAGS= ${CXXFLAGS}"
 echo "LIBS= ${LIBS}"
-AC_OUTPUT([ \
-	Makefile \
-	src/Makefile \
-	network/Makefile \
-])
+AC_OUTPUT
