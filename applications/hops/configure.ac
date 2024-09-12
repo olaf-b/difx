@@ -16,9 +16,6 @@ LT_INIT
 LT_CONFIG_LTDL_DIR([libltdl])
 LTDL_INIT
 
-dnl m4_ifset([LT_INIT], [LT_INIT], [LT_INIT])
-dnl m4_ifset([LTDL_INIT([])], [LTDL_INIT([])], [LTDL_INIT([])])
-
 AC_PROG_CC
 
 # ignore this line
