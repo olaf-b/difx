@@ -1,4 +1,11 @@
 AC_INIT([difxfilterbank], [0.7])
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+  utilities/Makefile
+  transient_daemon/Makefile
+  transient_wrapper/Makefile
+])
 
 AM_INIT_AUTOMAKE([foreign])
 
@@ -26,10 +33,4 @@ LIBS=" ${FXCORR_LIBS} ${DIFXIO_LIBS} ${DIFXMESSAGE_LIBS} ${PLPLOT_LIBS}"
 AC_PROG_CXX
 AC_PROG_CC
 
-AC_OUTPUT([
-	Makefile \
-	src/Makefile \
-	utilities/Makefile \
-	transient_daemon/Makefile \
-	transient_wrapper/Makefile \
-])
+AC_OUTPUT
