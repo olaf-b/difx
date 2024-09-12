@@ -1,10 +1,11 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
-AC_INIT([bitOrderFT], [1.0], [ditko86@gmail.com])
-AM_INIT_AUTOMAKE(pippo, 2.6)
+AC_PREREQ([2.72])
+AC_INIT([bitOrderFT],[1.0],[ditko86@gmail.com])
+
 AC_CONFIG_SRCDIR([src/bitOrderFT.cpp])
+AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
@@ -156,4 +157,5 @@ echo "LIBS = ${LIBS}"
 
 #AC_CONFIG_FILES([Makefile
     #             src/Makefile])
-AC_OUTPUT(Makefile src/Makefile) 
+AC_CONFIG_FILES([Makefile src/Makefile])
+AC_OUTPUT 
