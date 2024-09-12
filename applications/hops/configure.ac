@@ -5,15 +5,19 @@
 # Note that HOPS doesn't presently use hops_config.h except
 # to detect endianism in bytflp.h for some of the tools.
 #
-AC_PREREQ(2.59)
-AC_INIT(hops, 3.24, gbc@haystack.mit.edu)
+AC_PREREQ([2.72])
+AC_INIT([hops],[3.24],[gbc@haystack.mit.edu])
 AM_INIT_AUTOMAKE([foreign -Wno-extra-portability subdir-objects])
 
 AC_CONFIG_SRCDIR([hops.bash.in])
 AC_CONFIG_HEADERS([hops_config.h])
 AC_CONFIG_MACRO_DIR([m4])
-m4_ifset([LT_INIT], [LT_INIT], [AC_PROG_LIBTOOL])
-m4_ifset([LT_WITH_LTDL], [LT_WITH_LTDL], [AC_LIB_LTDL])
+LT_INIT
+LT_CONFIG_LTDL_DIR([libltdl])
+LTDL_INIT
+
+dnl m4_ifset([LT_INIT], [LT_INIT], [LT_INIT])
+dnl m4_ifset([LTDL_INIT([])], [LTDL_INIT([])], [LTDL_INIT([])])
 
 AC_PROG_CC
 
@@ -177,7 +181,7 @@ AC_PATH_PROG([ACLOCAL], [aclocal], [/bin/false])
 AC_PROG_CC
 AC_PROG_F77
 AC_PROG_LN_S
-AC_PROG_RANLIB
+dnl AC_PROG_RANLIB
 AC_F77_LIBRARY_LDFLAGS
 # this must follow AC_PROG_CC and AC_PROG_F77 for some reason
 if [test x$enable_mark5 = xyes] ; then
@@ -361,7 +365,8 @@ AC_TYPE_LONG_DOUBLE_WIDER
 if [$ac_hops] ; then
 AC_FUNC_ALLOCA
 AC_HEADER_DIRENT
-AC_HEADER_STDC
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS([arpa/inet.h fcntl.h float.h inttypes.h limits.h])
 AC_CHECK_HEADERS([locale.h netdb.h netinet/in.h stddef.h stdint.h])
 AC_CHECK_HEADERS([stdlib.h string.h strings.h sys/socket.h unistd.h])
