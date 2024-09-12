@@ -1,6 +1,9 @@
 AC_INIT([difx2mark4], [1.7], [Roger Cappallo <rjc@haystack.mit.edu>])
-AM_CONFIG_HEADER([config.h])
-
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([
+  Makefile
+  src/Makefile
+])
 AC_C_BIGENDIAN
 
 AM_INIT_AUTOMAKE
@@ -40,7 +43,4 @@ fi
 
 
 
-AC_OUTPUT([ \
-	Makefile \
-	src/Makefile
-])
+AC_OUTPUT
