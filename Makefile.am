@@ -79,7 +79,7 @@ if ENABLE_CALCIF2
   SUBDIRS += utilities/calcif2
 endif
 if ENABLE_DIFX2PROFILE
-  SUBDIRS += utilities/difx2profile
+  SUBDIRS += utilities/pulsar/difx2profile
 endif
 if ENABLE_MISC
   SUBDIRS += utilities/misc
