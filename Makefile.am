@@ -1,3 +1,4 @@
-SUBDIRS = @subdirs@
+SUBDIRS = @subdirs@ @subdirs_extra@
+
 
 
