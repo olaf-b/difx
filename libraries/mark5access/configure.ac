@@ -66,7 +66,6 @@ fi
 AM_CONDITIONAL([ENABLE_PYTHON_CTYPES], [test -n "$PYTHON" -a "x$REQUESTED_PYTHON_CTYPES" = "xyes" -a -n "$GOT_PYTHON_CTYPES"])
 
 
-export PKG_CONFIG_PATH+=":../codifio"
 PKG_CHECK_MODULES([CODIFIO], [codifio >= 0.2], [HAVE_CODIFIO=true], [HAVE_CODIFIO=false])
 AM_CONDITIONAL(USE_CODIFIO, $HAVE_CODIFIO)
 if test ${HAVE_CODIFIO} = true; then
@@ -75,7 +74,6 @@ if test ${HAVE_CODIFIO} = true; then
   LIBS="${LIBS} ${CODIFIO_LIBS}"
 fi
 
-export PKG_CONFIG_PATH+=":../mark6sg"
 PKG_CHECK_MODULES([MARK6SG], [mark6sg >= 2.0.2], [HAVE_MARK6SG=true], [HAVE_MARK6SG=false])
 AM_CONDITIONAL(USE_MARK6SG, $HAVE_MARK6SG)
 if test $HAVE_MARK6SG = true; then
