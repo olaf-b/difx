@@ -47,7 +47,7 @@ endif
 
 if WITH_FFTW
   bin_PROGRAMS += vdifPhase
-  vdifPhase_CFLAGS = $(FFTW_CFLAGS) $(INCLUDES)
+  vdifPhase_CFLAGS = $(FFTW3_CFLAGS) $(INCLUDES)
   vdifPhase_LDADD = $(FFTW3_LIBS) $(LDADD)
 endif
 
