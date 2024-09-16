@@ -354,11 +354,8 @@ AS_IF([test "x$enable_mark5access" == xyes],
   [AX_SUBDIRS_CONFIGURE([libraries/mark5access],
     [],
     [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/codifio/src \
-               -I${ac_abs_top_srcdir}/libraries/mark6sg/mark6gather],
-     [LDFLAGS=-L${ac_abs_top_builddir}/libraries/codifio/src \
-              -L${ac_abs_top_builddir}/libraries/mark6sg/mark6sg \
-	      -L${ac_abs_top_builddir}/libraries/mark6sg/mark6gather]],
+    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/codifio/src], \
+     [LDFLAGS=-L${ac_abs_top_builddir}/libraries/codifio/src]],
     []
   )])
 AS_IF([test "x$enable_python" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/python])])
@@ -396,7 +393,7 @@ AS_IF([test "x$enable_vex2difx" == xyes],
 	       -I${ac_abs_top_srcdir}/libraries/difxmessage],
      [LDFLAGS=-L${ac_abs_top_builddir}/libraries/difxio/difxio \
               -L${ac_abs_top_builddir}/libraries/dirlist/src \
-	      -L${ac_abs_top_builddir}/libraries/difxmessage]]
+	      -L${ac_abs_top_builddir}/libraries/difxmessage]],
     []
   )])
 AS_IF([test "x$enable_difx2mark4" == xyes], [AX_SUBDIRS_CONFIGURE([applications/difx2mark4])])
