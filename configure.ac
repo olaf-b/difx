@@ -1,5 +1,4 @@
 AC_INIT([difx], [2.8.1], [])
-AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AC_PROG_AWK
@@ -147,9 +146,9 @@ AC_MSG_RESULT([$enable_difx2mark4])
 AC_MSG_CHECKING([wether to build the mpifxcorr component])
 AC_ARG_ENABLE(mpifxcorr,
   [AS_HELP_STRING([--enable-mpifxcorr],
-    [Install mpifxcorr (not enabled by default)])],
+    [Install mpifxcorr (enabled by default)])],
   [],
-  [enable_mpifxcorr=no])
+  [enable_mpifxcorr=yes])
 AC_MSG_RESULT([$enable_mpifxcorr])
 
 AC_MSG_CHECKING([wether to build the mark6sg component])
@@ -221,7 +220,7 @@ AC_ARG_ENABLE(datasim,
   [AS_HELP_STRING([--enable-datasim],
     [Install datasim (not enabled by default)])],
   [],
-  [enable_datasim=yes])
+  [enable_datasim=no])
 AC_MSG_RESULT([$enable_datasim])
 
 AC_MSG_CHECKING([wether to build the python component])
@@ -231,6 +230,14 @@ AC_ARG_ENABLE(python,
   [],
   [enable_python=yes])
 AC_MSG_RESULT([$enable_python])
+
+AC_MSG_CHECKING([wether to build the espresso component])
+AC_ARG_ENABLE(espresso,
+  [AS_HELP_STRING([--enable-espresso],
+    [Install espresso component (enabled by default)])],
+  [],
+  [enable_espresso=yes])
+AC_MSG_RESULT([$enable_espresso])
 
 AC_MSG_CHECKING([whether to build documentation])
 AC_ARG_WITH(doc,
@@ -344,94 +351,41 @@ AC_SUBST([ipp_cflags])
 AC_SUBST([ipp_libs])
 
 dnl libs
-AS_IF([test "x$enable_difxio" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/difxio])])
-AS_IF([test "x$enable_codifio" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/codifio])])
-AS_IF([test "x$enable_difxmessage" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/difxmessage])])
-AS_IF([test "x$enable_dirlist" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/dirlist])])
-AS_IF([test "x$enable_mark6sg" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/mark6sg])])
-AS_IF([test "x$enable_mark6meta" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/mark6meta])])
-AS_IF([test "x$enable_mark5access" == xyes],
-  [AX_SUBDIRS_CONFIGURE([libraries/mark5access],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/codifio/src], \
-     [LDFLAGS=-L${ac_abs_top_builddir}/libraries/codifio/src]],
-    []
-  )])
-AS_IF([test "x$enable_python" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/python])])
-AS_IF([test "x$enable_vdifio" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/vdifio])])
+#AS_IF([test "x$enable_difxio" == xyes], [AX_SUBDIRS_CONFIGURE([libraries/difxio])])
+AS_IF([test "x$enable_difxio" == xyes], [AC_CONFIG_SUBDIRS([libraries/difxio])])
+AS_IF([test "x$enable_codifio" == xyes], [AC_CONFIG_SUBDIRS([libraries/codifio])])
+AS_IF([test "x$enable_difxmessage" == xyes], [AC_CONFIG_SUBDIRS([libraries/difxmessage])])
+AS_IF([test "x$enable_dirlist" == xyes], [AC_CONFIG_SUBDIRS([libraries/dirlist])])
+AS_IF([test "x$enable_mark6sg" == xyes], [AC_CONFIG_SUBDIRS([libraries/mark6sg])])
+AS_IF([test "x$enable_mark6meta" == xyes], [AC_CONFIG_SUBDIRS([libraries/mark6meta])])
+AS_IF([test "x$enable_mark5access" == xyes], [AC_CONFIG_SUBDIRS([libraries/mark5access])])
+AS_IF([test "x$enable_python" == xyes], [AC_CONFIG_SUBDIRS([libraries/python])])
+AS_IF([test "x$enable_vdifio" == xyes], [AC_CONFIG_SUBDIRS([libraries/vdifio])])
 
-AS_IF([test "x$enable_mpifxcorr" == xyes],
-  [AX_SUBDIRS_CONFIGURE([mpifxcorr],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/mark5access \
-               -I${ac_abs_top_srcdir}/libraries/difxio \
-	       -I${ac_abs_top_srcdir}/libraries/difxmessage \
-               -I${ac_abs_top_srcdir}/libraries/vdifio/src]],
-    []
-  )])
-#[AX_SUBDIRS_CONFIGURE([mpifxcorr])])
+AS_IF([test "x$enable_mpifxcorr" == xyes], [AC_CONFIG_SUBDIRS([mpifxcorr])])
 
 dnl applications
-AS_IF([test "x$enable_calcserver" == xyes], [AX_SUBDIRS_CONFIGURE([applications/calcserver])])
-AS_IF([test "x$enable_difxcalc11" == xyes], [AX_SUBDIRS_CONFIGURE([applications/difxcalc11])])
-AS_IF([test "x$enable_difx2fits" == xyes],
-  [AX_SUBDIRS_CONFIGURE([applications/difx2fits],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/difxio],
-     [LDFLAGS=-L${ac_abs_top_builddir}/libraries/difxio/difxio]],
-    []
-  )])
-AS_IF([test "x$enable_vex2difx" == xyes],
-  [AX_SUBDIRS_CONFIGURE([applications/vex2difx],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/difxio \
-               -I${ac_abs_top_srcdir}/libraries/dirlist/src \
-	       -I${ac_abs_top_srcdir}/libraries/difxmessage],
-     [LDFLAGS=-L${ac_abs_top_builddir}/libraries/difxio/difxio \
-              -L${ac_abs_top_builddir}/libraries/dirlist/src \
-	      -L${ac_abs_top_builddir}/libraries/difxmessage]],
-    []
-  )])
-AS_IF([test "x$enable_difx2mark4" == xyes], [AX_SUBDIRS_CONFIGURE([applications/difx2mark4])])
-AS_IF([test "x$enable_difxfilterbank" == xyes], [AX_SUBDIRS_CONFIGURE([applications/difxfilterbank])])
-AS_IF([test "x$enable_hops" == xyes], [AX_SUBDIRS_CONFIGURE([applications/hops])])
-AS_IF([test "x$enable_m6support" == xyes], [AX_SUBDIRS_CONFIGURE([applications/m6support])])
-AS_IF([test "x$enable_polconvert" == xyes], [AX_SUBDIRS_CONFIGURE([applications/polconvert])])
-AS_IF([test "x$enable_guiServer" == xyes], [AX_SUBDIRS_CONFIGURE([applications/guiServer])])
-AS_IF([test "x$enable_mk5daemon" == xyes], [AX_SUBDIRS_CONFIGURE([applications/mk5daemon])])
-AS_IF([test "x$enable_difx_monitor" == xyes], [AX_SUBDIRS_CONFIGURE([applications/difx_monitor])])
-AS_IF([test "x$enable_datasim" == xyes],
-  [AX_SUBDIRS_CONFIGURE([applications/datasim],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/libraries/vdifio/src]],
-    []
-  )])
-AS_IF([test "x$enable_espresso" == xyes], [AX_SUBDIRS_CONFIGURE([applications/expresso])])
+AS_IF([test "x$enable_calcserver" == xyes], [AC_CONFIG_SUBDIRS([applications/calcserver])])
+AS_IF([test "x$enable_difxcalc11" == xyes], [AC_CONFIG_SUBDIRS([applications/difxcalc11])])
+AS_IF([test "x$enable_difx2fits" == xyes],  [AC_CONFIG_SUBDIRS([applications/difx2fits])])
+AS_IF([test "x$enable_vex2difx" == xyes], [AC_CONFIG_SUBDIRS([applications/vex2difx])])
+AS_IF([test "x$enable_difx2mark4" == xyes], [AC_CONFIG_SUBDIRS([applications/difx2mark4])])
+AS_IF([test "x$enable_difxfilterbank" == xyes], [AC_CONFIG_SUBDIRS([applications/difxfilterbank])])
+AS_IF([test "x$enable_hops" == xyes], [AC_CONFIG_SUBDIRS([applications/hops])])
+AS_IF([test "x$enable_m6support" == xyes], [AC_CONFIG_SUBDIRS([applications/m6support])])
+AS_IF([test "x$enable_polconvert" == xyes], [AC_CONFIG_SUBDIRS([applications/polconvert])])
+AS_IF([test "x$enable_guiServer" == xyes], [AC_CONFIG_SUBDIRS([applications/guiServer])])
+AS_IF([test "x$enable_mk5daemon" == xyes], [AC_CONFIG_SUBDIRS([applications/mk5daemon])])
+AS_IF([test "x$enable_difx_monitor" == xyes], [AC_CONFIG_SUBDIRS([applications/difx_monitor])])
+AS_IF([test "x$enable_datasim" == xyes], [AC_CONFIG_SUBDIRS([applications/datasim])])
+AS_IF([test "x$enable_espresso" == xyes], [AC_CONFIG_SUBDIRS([applications/espresso])])
 
 dnl utils
-AS_IF([test "x$enable_calcif2" == xyes], [AX_SUBDIRS_CONFIGURE([utilities/calcif2])])
-AS_IF([test "x$enable_difx2profile" == xyes],
-  [AX_SUBDIRS_CONFIGURE([utilities/pulsar/difx2profile],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/mpifxcorr/src]],
-    []
-  )])
+AS_IF([test "x$enable_calcif2" == xyes], [AC_CONFIG_SUBDIRS([utilities/calcif2])])
+AS_IF([test "x$enable_difx2profile" == xyes], [AC_CONFIG_SUBDIRS([utilities/pulsar/difx2profile])])
+AS_IF([test "x$enable_misc" == xyes], [AC_CONFIG_SUBDIRS([utilities/misc])])
+AS_IF([test "x$enable_vis2screen" == xyes], [AC_CONFIG_SUBDIRS([utilities/vis2screen])])
 
-
-AS_IF([test "x$enable_misc" == xyes], [AX_SUBDIRS_CONFIGURE([utilities/misc])])
-AS_IF([test "x$enable_vis2screen" == xyes],
-  [AX_SUBDIRS_CONFIGURE([utilities/vis2screen],
-    [],
-    [],
-    [[CPPFLAGS=-I${ac_abs_top_srcdir}/mpifxcorr/src]],
-    []
-  )])
 
 AC_SUBST([subdirs])
 
