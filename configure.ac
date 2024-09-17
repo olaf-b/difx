@@ -1,3 +1,62 @@
+dnl This is the top level autoconf file for DIFX Made to replace the
+dnl use of shell-script and python script install-difx to have a more
+dnl coherent build set-up that ties in with the already existing
+dnl autoconf/automake toolset used by the separate tools contained
+dnl herein.
+dnl
+dnl The original autoconf/automake setup is separate for each libary
+dnl and application and pkg-config is used througout.  This requires
+dnl setting a lot of variables when building using this top level
+dnl configure.ac.  An example installations using auxillary homebrew
+dnl packages on a Mac OS arm64 running Darwin requires a typical setup
+dnl like this:
+dnl
+dnl    CPPFLAGS="-I/opt/homebrew/include \
+dnl    -I$(pwd)/libraries/codifio/src \
+dnl    -I$(pwd)/libraries/vdifio/src \
+dnl    -I$(pwd)/libraries/mark5access \
+dnl    -I$(pwd)/libraries/difxmessage"
+dnl    LDFLAGS="-L$(pwd)/libraries/codifio/src \
+dnl    -L$(pwd)/libraries/vdifio/src \
+dnl    -L$(pwd)/libraries/difxmessage/difxmessage \
+dnl    -L$(pwd)/libraries/mark5access/mark5access \
+dnl    -L$(pwd)/libraries/difxmessage/mark5ipc \
+dnl    -L$(pwd)/libraries/codifio/src \
+dnl    -L$(pwd)/libraries/dirlist/src \
+dnl    -L/opt/homebrew/lib"
+dnl    LIBS="-lmpi"
+dnl    PKG_CONFIG_PATH=$(pwd)/libraries/difxmessage
+dnl    PKG_CONFIG_PATH+=:$(pwd)/libraries/vdifio
+dnl    PKG_CONFIG_PATH+=:$(pwd)/libraries/mark5access
+dnl    PKG_CONFIG_PATH+=:$(pwd)/libraries/difxio
+dnl    PKG_CONFIG_PATH+=:$(pwd)/libraries/dirlist
+dnl    
+dnl    autoreconf -i --force -v && \
+dnl        ./configure CPPFLAGS="$CPPFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" \
+dnl            PKG_CONFIG_PATH="$PKG_CONFIG_PATH" \
+dnl            --enable-difx2profile=no --enable-misc=no --enable-vis2screen=no \
+dnl            --enable-difx2fits=no --enable-vex2difx=no \
+dnl            --with-ipp=no --enable-mpifxcorr --enable-misc=no && \
+dnl                make
+dnl
+dnl Obviously, there is no need for using pkg-config on each sub
+dnl project, and the software should be set up without pkg-config for
+dnl the individual components.  In stead, the top level project should
+dnl produce the pkg-config .pc files for an installation, and set
+dnl library and build dependencies accordingly.  This change to /not/
+dnl using sub-level PKG_CHECK_MODULES and AC_CONFIG_SUBDIRS is work in
+dnl pending.  But compared to the alternative with sourcing
+dnl shell-scipts and invoking a custom and non-standard python script
+dnl install-difx, the use of an autotools build system incurs less
+dnl surprises allowing the classical
+dnl
+dnl    ./configure && make && make install
+dnl
+dnl (with adjustments).  When a transition away from sub-project use
+dnl of PKG_CHECK_MODULES and set-up of dependencies, it is expected
+dnl that the system intrpospection and build will become as simple as
+dnl the above.
+
 AC_INIT([difx], [2.8.1], [])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
