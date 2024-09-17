@@ -44,7 +44,7 @@ dnl project, and the software should be set up without pkg-config for
 dnl the individual components.  In stead, the top level project should
 dnl produce the pkg-config .pc files for an installation, and set
 dnl library and build dependencies accordingly.  This change to /not/
-dnl using sub-level PKG_CHECK_MODULES and AC_CONFIG_SUBDIRS is work in
+dnl using sub-level PKG_CHECK_MODULES and AC_CONFIG_SUBDIRS is work
 dnl pending.  But compared to the alternative with sourcing
 dnl shell-scipts and invoking a custom and non-standard python script
 dnl install-difx, the use of an autotools build system incurs less
@@ -54,7 +54,7 @@ dnl    ./configure && make && make install
 dnl
 dnl (with adjustments).  When a transition away from sub-project use
 dnl of PKG_CHECK_MODULES and set-up of dependencies, it is expected
-dnl that the system intrpospection and build will become as simple as
+dnl that the system introspection and build will become as simple as
 dnl the above.
 
 AC_INIT([difx], [2.8.1], [])
