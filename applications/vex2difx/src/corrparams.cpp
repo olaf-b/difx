@@ -32,9 +32,9 @@
 #include <unistd.h>
 #include <difxio.h>
 #include <vexdatamodel.h>
-#include <dirlist/dirlist.h>
-#include <dirlist/old_dirlist.h>
-#include <dirlist/old_filelist.h>
+#include <dirlist.h>
+#include <old_dirlist.h>
+#include <old_filelist.h>
 
 #include "timeutils.h"
 #include "corrparams.h"
